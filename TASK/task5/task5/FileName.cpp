@@ -8,7 +8,7 @@ int main()
 	SetConsoleCP(65001);
 
 	int arr[5] = { 42, 34, 67, 12, 89};
-	int sum = 0;
+	int sum = 0; 
 
 	cout << "Всі елементи: \n";
 

@@ -17,6 +17,6 @@ int main()
 	cin >> data2;
 
 	cout << data1 << data2;
-
+	// не зроблю
 	return 0;
 }

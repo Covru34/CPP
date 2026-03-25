@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="2.while/2.while.vcxproj" Id="bc0f8ff0-9241-4088-b092-9204f9d903f6" />
+  <Project Path="dz5.1/dz5.1.vcxproj" />
 </Solution>

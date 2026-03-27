@@ -11,7 +11,7 @@ int main()
 	cout << "Введіть любе ціле число до 500: \n";
 	cin >> a;
 
-	int sum = 0;
+	int sum = 0; 
 
 	while (a <= 500)
 	{

@@ -14,7 +14,9 @@ int main()
 	
 	cout << "Введіть розмір масива: \n";
 	cin >> size;
-	int arr[100];
+	
+	int* arr = new int[size];
+
 	cout << "Введіть елементи масиву: \n";
 	for (int i = 0; i < size; i++)
 	{
@@ -22,6 +24,8 @@ int main()
 	}
 	
 	cout << "Середнє арифметичне: " << X(arr, size) << endl;
+
+	delete[] arr;
 
 	return 0;
 }

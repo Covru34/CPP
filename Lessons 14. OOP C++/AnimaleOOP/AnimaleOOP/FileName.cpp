@@ -50,7 +50,8 @@ int main()
 	Animal lupik;
 	lupik.print();
 
-	Animal fluttershy("Флаттершай", "Алікорн", 20, 42);
+	cout << "---Конструктор з параметрами---";
+	Animal fluttershy("Флаттершай", "Поні(Алікорн)", 20, 42);
 	fluttershy.print();
 
 }

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="AnimaleOOP/AnimaleOOP.vcxproj" Id="17374bc8-8383-4b0c-b7b7-8a207857a951" />
+  <Project Path="StructFile/StructFile.vcxproj" />
 </Solution>

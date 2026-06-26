@@ -18,11 +18,7 @@ public:
 		return name;
 	}
 
-	virtual void takeDamage(int damage) {
-		health -= damage;
-		if (health < 0) health = 0;
-		cout << name << " отримав " << damage << " шкоди. Залишклося HP: " << health << "\n";
-	}
+	virtual void takeDamage(int damage) = 0;
 
 };
 
@@ -31,7 +27,7 @@ private:
 	int mana;
 public:
 	Wizard(string wizardName, int wizardHealth, int wizardMana)
-		: Hero(wizardName, wizardHealth) { // виклкиємо конструтор класа Hero так як не має потреби створювати змінні в name і health щей в цбоиу класі
+		: Hero(wizardName, wizardHealth) { // виклкиємо конструтор класа Hero так як не має потреби створювати змінні в name і health щей в цьому класі
 		mana = wizardMana; // додаємо нову змінну для конструктора мага
 	}
 
@@ -94,37 +90,65 @@ public:
 	}
 };
 
+class Warrior : public Hero {
+private:
+	int stamina;
+public:
+	Warrior(string warriorName, int warriorHealth, int warriorStamina)
+		: Hero(warriorName, warriorHealth) {
+		stamina = warriorStamina;
+	}
+
+	void punch() {
+		if (stamina >= 50) {
+			stamina -= 50;
+			cout << getName() << " наносить удар мечом. (Стаміна: " << stamina << ")\n";
+		}
+		else {
+			cout << getName() << " втомився\n";
+		}
+	} 
+	
+	void takeDamage(int damage) override {
+		if (stamina >= 10) {
+			stamina -= 10;
+			damage = damage - 5;
+			if (damage < 0) damage = 0;
+			health -= damage;
+			if (health < 0) health = 0;
+			cout << name << " отримав " << damage << " шкоди. Залишклося HP: " << health << "\n";
+		}
+		else {
+			health -= damage;
+			if (health < 0) health = 0;
+			cout << name << " отримав " << damage << " шкоди. Залишклося HP: " << health << "\n";
+		}
+	}
+	
+};
+
 int main()
 {
 	SetConsoleOutputCP(65001);
 	SetConsoleCP(65001);
 	srand(time(0));
 
-	Hero lupik("Чмошнік люпік", 50);
-	lupik.takeDamage(30);
-
-	cout << "------------------------\n";
-
 	Wizard arsen("Арсен", 90, 20);
-	arsen.castSpell();
-	arsen.takeDamage(15);
-	arsen.takeDamage(10);
-	arsen.takeDamage(5);
-	
+	Archer mykola("Міколя", 100, 5);
+	Warrior lupik("Ярик", 120, 160);
 
-	cout << "------------------------\n";
+	Hero* team[3];
+	team[0] = &arsen;
+	team[1] = &mykola;
+	team[2] = &lupik;
 
-	Archer pablin("Паблін", 100, 3);
-	pablin.shootArrow();
-	pablin.takeDamage(10);
-	pablin.takeDamage(10);
-	pablin.takeDamage(10);
-	pablin.shootArrow();
-	pablin.takeDamage(15);
-	pablin.shootArrow();
-	pablin.takeDamage(30);
-	pablin.shootArrow();
+	cout << "=== ПАБЛІН НАНОСИТЬ УДАР БАНАНОМ ПО ОБЛАСТІ (ПО 30 ШКОДИ ВСІМ) ===\n\n";
+
+	for (int i = 0; i < 3; i++)
+	{
+		team[i]->takeDamage(30);
+		cout << "-------------------------------\n";
+	}
 
 	return 0;
-
 }

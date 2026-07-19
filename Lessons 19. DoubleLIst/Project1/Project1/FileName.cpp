@@ -48,7 +48,7 @@ public:
 		while (temp != NULL) // Доки ми не знаходимося у кінці
 		{
 			cout << temp->data << "\n"; //виводимо дані ц вузіл
-			temp = temp->next;//переходимо на настпуний список
+			temp = temp->next;//пер еходимо на настпуний список
 		}     
 	}
 	void Remove(int data)
@@ -101,6 +101,6 @@ int main()
 	myList.ShowList();
 	myList.Remove(12);
 	myList.ShowList();
-
+	
 	return 0;
 }

@@ -18,13 +18,5 @@
     <ClCompile Include="FileName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Subscriber.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Subscriber.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

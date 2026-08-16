@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="DZ16/DZ16.vcxproj" Id="83dcbf70-b49b-4c00-ac2c-c163b7759b93" />
+  <Project Path="SimpleTree/SimpleTree.vcxproj" Id="1d9cd464-2dab-4a94-94a2-2652ca0b8888" />
 </Solution>

@@ -183,6 +183,21 @@ private:
 			return search(node->left, value);
 		return search(node->right, value);
 	}
+	
+	void printRange(Node* node, const Car& from, const Car& to)
+	{
+		if (node == nullptr)
+			return;
+
+		if (node->data > from)
+			printRange(node->left, from, to);
+
+		if (!(node->data < from) && !(node->data > to))
+			cout << node->data << '\n';
+
+		if (node->data < to)
+			printRange(node->right, from, to);
+	}
 
 public:
 	BinarySearchTree()
@@ -204,6 +219,16 @@ public:
 	bool Find(const Car& value)
 	{
 		return search(root, value);
+	}
+
+	void showRange(string startNumber, string endNumber)
+	{
+		Car startCar(startNumber);
+		Car endCar(endNumber);
+
+		cout << "--- Звіт та діапазон [" << startNumber << " ... " << endNumber << "] ---\n";
+		printRange(root, startCar, endCar);
+		cout << '\n';
 	}
 };
 
@@ -240,6 +265,8 @@ int main()
 
 	cout << "Пошук BC1111AA: " << (database.Find(searchTarget1) ? "Знайдено" : "Не знайдено") << '\n';
 	cout << "Пошук XX9999XX: " << (database.Find(searchTarget2) ? "Знайдено" : "Не знайдено") << '\n';
+
+	database.showRange("AA0000AA", "BC9999ZZ");
 
 	return 0;
 }

@@ -19,6 +19,14 @@ public:
 		this->deadlift = deadlift;
 	}
 
+	Athlete()
+	{
+		this->name = "Empty";
+		this->benchPress = 0;
+		this->squats = 0;
+		this->deadlift = 0;
+	}
+
 	void show()
 	{
 		cout << "Спортсмен: " << name << " | Жим: " << benchPress << " кг | Присяд: " << squats << " кг | Станова: " << deadlift << " кг\n";
@@ -86,6 +94,67 @@ public:
 	}
 };
 
+class Gym
+{
+private:
+	Athlete members[5];
+	int count = 0;
+public:
+	void addAthlete(const Athlete& ath)
+	{
+		if (count < 5)
+		{
+			members[count] = ath;
+			count++;
+		}
+		else
+		{
+			cout << "Зал заповнений!\n";
+		}
+	}
+
+	void showAll()
+	{
+		for (int i = 0; i < count; i++)
+		{
+			cout << i + 1 << ". " << members[i] << '\n';
+		}
+	}
+
+	void findAthlete(string name)
+	{
+		for (int i = 0; i < count; i++)
+		{
+			if (members[i].getName() == name)
+			{
+				cout << "Знайдено: " << members[i];
+				return;
+			}
+			
+		}
+		cout << "Атлета " << name << " не знайдено\n";
+	}
+
+	void removeAthlete(string name)
+	{
+		for (int i = 0; i < count; i++)
+		{
+			if (members[i].getName() == name)
+			{
+				for (int j = i; j < count - 1; j++)
+				{
+					members[j] = members[j + 1];
+				}
+				count--;
+				cout << "Атлета " << name << " видалено\n";
+				return;
+			}
+		}
+		cout << "Атлета " << name << " не знайдено\n";
+	}
+
+};
+
 int main()
 {
 	SetConsoleOutputCP(65001);
@@ -110,6 +179,17 @@ int main()
 
 	cout << "\nПеревірка в main після тренування:\n";
 	cout << Pablin;
+
+	Gym myGym;
+	cout << "Список учасників залу:\n";
+	myGym.addAthlete(Pablin);
+	myGym.addAthlete(BortProvodnik);
+	myGym.showAll();
+	myGym.findAthlete("Борт");
+	myGym.findAthlete("Іван");
+
+	myGym.removeAthlete("Борт");
+	myGym.showAll();
 
 	return 0;
 }

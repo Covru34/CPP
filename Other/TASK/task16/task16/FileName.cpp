@@ -1,6 +1,7 @@
 #include<iostream>
 #include<Windows.h>
 #include<string>
+#include<fstream>
 using namespace std;
 
 class Car
@@ -136,6 +137,65 @@ public:
 		}
 		cout << "Автомобіль " << model << " не знайдено\n";
 	}
+
+	void saveToFile(string filename)
+	{
+		ofstream outFile(filename); // відкриваємо файл
+
+		if (!outFile.is_open()) // вбудована функція в бібілотеці fstream
+		{
+			cout << "Помилка відкриття файлу для запису!\n";
+			return;
+		}
+
+		outFile << count << '\n'; // записуємо кількість машин першим рядком
+
+		for (int i = 0; i < count; i++)
+		{
+			outFile << cars[i].getModel() << '\n'
+					<< cars[i].getHP() << '\n'
+					<< cars[i].getPrice() << '\n';
+		}
+
+		outFile.close(); // обов'язково закриваємо файл
+		cout << "Дані успішно збережені у файл " << filename << '\n';
+	}
+
+	void loadFromFile(string filename)
+	{
+		ifstream inFile(filename);
+
+		if (!inFile.is_open())
+		{
+			cout << "Файл не знайдено!\n";
+			return;
+		}
+
+		int fileCount;
+		inFile >> fileCount; // зчитує кількість машин
+
+		count = 0; // очищаємо наш поточний масив
+
+		for (int i = 0; i < fileCount; i++)
+		{
+			string m;
+			int hp, p;
+
+			// зчитуємо дані з фалй в тимчасові змінні
+			// ws прибирає зайві пробіли/переноси рядків перед getline
+			inFile >> ws;
+			getline(inFile, m); // зчитує повну назву моделі
+			inFile >> hp;
+			inFile >> p;
+
+			// створюємо авто і додаємо в салон
+			Car loaderCar(m, hp, p);
+			addCar(loaderCar);
+		}
+
+		inFile.close();
+		cout << "Дані успішно завантажені з файлу " << filename << '\n';
+	}
 };
 
 int main()
@@ -143,9 +203,9 @@ int main()
 	SetConsoleOutputCP(65001);
 	SetConsoleCP(65001);
 	
-	Car BMW("BMW M3", 473, 78400);
+	Car BMW("BMW_M3", 473, 78400);
 	cout << BMW;
-	Car Audi("Audi A4", 150, 44100);
+	Car Audi("Audi_A4", 150, 44100);
 	cout << Audi;
 
 	if (BMW > Audi)
@@ -166,6 +226,11 @@ int main()
 	mySalon.findCar("BMW M3");
 	mySalon.removeCar("Audi A4");
 	mySalon.showAll();
+
+	mySalon.saveToFile("cars.txt");
+	Dealership newSalon;
+	newSalon.loadFromFile("cars.txt");
+	newSalon.showAll();
 
 	return 0;
 }

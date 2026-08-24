@@ -82,21 +82,46 @@ public:
 class Dealership
 {
 private:
-	Car cars[5];
+	Car* cars;
 	int count = 0;
+	int capacity;
+
+	void resize()
+	{
+		capacity *= 2;
+		Car* newCars = new Car[capacity];
+
+		for (int i = 0; i < count; i++)
+		{
+			newCars[i] = cars[i];
+		}
+
+		delete[] cars;
+		cars = newCars;
+
+		cout << "Салон розширено. Нова місткість: " << capacity << '\n';
+	}
 public:
-	
+	// створюємо масив заданого розімру
+	Dealership(int cap = 5)
+	{
+		capacity = cap;
+		cars = new Car[capacity];
+	}
+	// Деструктор, викликається автоматично при знищенні об'єкта
+	~Dealership()
+	{
+		delete[] cars;
+	}
 
 	void addCar(const Car& car)
 	{
-		if (count < 5)
+		if(count == capacity)
 		{
-			cars[count] = car;
-			count++;
+			resize();
 		}
-		else {
-			cout << "Салон заповнений!\n";
-		}
+		cars[count] = car;
+		count++;
 	}
 
 	void showAll()
@@ -207,30 +232,38 @@ int main()
 	cout << BMW;
 	Car Audi("Audi_A4", 150, 44100);
 	cout << Audi;
+	Car UA("Potyjnui_car", 420, 42000);
+	cout << UA;
 
-	if (BMW > Audi)
-	{
-		cout << BMW.getModel() << " краще за " << Audi.getModel() << '\n';
-	}
-	else {
-		cout << Audi.getModel() << " краще за " << BMW.getModel() << '\n';
-	}
+	//if (BMW > Audi)
+	//{
+	//	cout << BMW.getModel() << " краще за " << Audi.getModel() << '\n';
+	//}
+	//else {
+	//	cout << Audi.getModel() << " краще за " << BMW.getModel() << '\n';
+	//}
 
-	Drive bmw(BMW, "Володимер");
-	bmw.start();
+	//Drive bmw(BMW, "Володимер");
+	//bmw.start();
 
-	Dealership mySalon;
-	mySalon.addCar(BMW);
-	mySalon.addCar(Audi);
-	mySalon.showAll();
-	mySalon.findCar("BMW M3");
-	mySalon.removeCar("Audi A4");
-	mySalon.showAll();
+	//Dealership mySalon;
+	//mySalon.addCar(BMW);
+	//mySalon.addCar(Audi);
+	//mySalon.showAll();
+	//mySalon.findCar("BMW M3");
+	//mySalon.removeCar("Audi A4");
+	//mySalon.showAll();
 
-	mySalon.saveToFile("cars.txt");
-	Dealership newSalon;
-	newSalon.loadFromFile("cars.txt");
-	newSalon.showAll();
+	//mySalon.saveToFile("cars.txt");
+	//Dealership newSalon;
+	//newSalon.loadFromFile("cars.txt");
+	//newSalon.showAll();
+
+	Dealership secondSalon(2);
+	secondSalon.addCar(BMW);
+	secondSalon.addCar(Audi);
+	secondSalon.addCar(UA);
+	secondSalon.showAll();
 
 	return 0;
 }

@@ -124,7 +124,7 @@ public:
 
 int main()
 {
-	SetConsoleOutputCP(65001);
+	SetConsoleOutputCP(65001);  // попка
 	SetConsoleCP(65001);
 
 	Item sword("Iron Sword", "Common", 5);

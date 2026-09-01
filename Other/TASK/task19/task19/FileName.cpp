@@ -59,7 +59,7 @@ private:
 		if (current == nullptr) return;
 		clear(current->left);
 		clear(current->right);
-		delete current; // видаляємо вузоол лише рісля того як видалили його дітей
+		delete current; // видаляємо вузоол ли   ше рісля того як видалили його дітей
 	}
 public:
 	BinaryTree()
